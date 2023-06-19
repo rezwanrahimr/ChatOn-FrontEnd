@@ -1,4 +1,5 @@
 import { AiFillMessage } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const handleForm = (e) => {
@@ -21,31 +22,31 @@ const Login = () => {
           <form className="card-body" onSubmit={handleForm}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                {/* <span className="label-text">Email</span> */}
               </label>
               <input
                 type="text"
                 name="email"
                 required
-                placeholder="email"
-                className="input input-bordered"
+                placeholder="Phone Number or Email"
+                className="input input-bordered bg-neutral-100"
               />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                {/* <span className="label-text">Password</span> */}
               </label>
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 name="password"
                 required
-                className="input input-bordered"
+                className="input input-bordered bg-neutral-100 font-normal"
               />
               <label className="label">
                 <a
                   href="#"
-                  className="label-text-alt link link-hover text-primary"
+                  className="font-normal link link-hover text-gray-500"
                 >
                   Forgot password?
                 </a>
@@ -56,6 +57,9 @@ const Login = () => {
                 Login
               </button>
             </div>
+            <Link to="/signUp" className="text-primary text-center">
+              create a account
+            </Link>
           </form>
         </div>
       </div>
