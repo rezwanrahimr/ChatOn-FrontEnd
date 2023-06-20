@@ -1,12 +1,37 @@
+import { useContext, useState } from "react";
 import { AiFillMessage } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthenticationContext";
+import userToken from "../../../Hooks/userToken";
 
 const Login = () => {
+  const [authError, setAuthError] = useState("");
+  const { signInWithEmail } = useContext(AuthContext);
+
   const handleForm = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+
+    setAuthError("");
+    signInWithEmail(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        const userInfo = {
+          email,
+        };
+
+        if (user) {
+          userToken(userInfo);
+        }
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        errorMessage && setAuthError(errorMessage);
+      });
+
+    e.target.reset();
   };
 
   return (
@@ -52,6 +77,7 @@ const Login = () => {
                 </a>
               </label>
             </div>
+            <p className="text-red-500">{authError}</p>
             <div className="form-control mt-6">
               <button className="btn bg-red-500 text-white" type="submit">
                 Login
